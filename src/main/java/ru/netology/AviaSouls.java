@@ -26,26 +26,25 @@ public class AviaSouls {
     }
 
     public Ticket[] search(String from, String to) {
-        Ticket[] result = new Ticket[0]; // массив для ответа
-        for (Ticket ticket : tickets) { // перебираем все билеты
-            if (ticket.getFrom().equals(from) && ticket.getTo().equals(to)) { // совпадает аэропорт вылета и прилёта
-                result = addToArray(result, ticket); // добавляем его в массив ответа
-            }
-        }
-        Arrays.sort(result); // сортируем массив найденных билетов
-        return result; // возвращаем отсортированный массив
-    }
-
-    public Ticket[] searchAndSortBy(String from, String to, Comparator<Ticket> comparator) {
-        List<Ticket> result = new ArrayList<>();
+        Ticket[] result = new Ticket[0];
         for (Ticket ticket : tickets) {
             if (ticket.getFrom().equals(from) && ticket.getTo().equals(to)) {
-                result.add(ticket);
+                result = addToArray(result, ticket);
             }
         }
-        result.sort(comparator);
-        return result.toArray(new Ticket[0]);
+        Arrays.sort(result);
+        return result;
+    }
+
+    public Ticket[] searchAndSort(String from, String to, Comparator<Ticket> comparator) {
+        Ticket[] result = new Ticket[0];
+        for (Ticket ticket : tickets) {
+            if (ticket.getFrom().equals(from) && ticket.getTo().equals(to)) {
+                result = addToArray(result, ticket);
+            }
+        }
+        Arrays.sort(result, comparator);
+        return result;
+
     }
 }
-
-
